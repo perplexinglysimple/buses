@@ -29,8 +29,7 @@ class RotatingFileOpener:
     def __exit__(self, *args):
         return getattr(self._file, '__exit__')(*args)
     def _day_changed(self):
-        return True
-        #return self._day != time.localtime().tm_mday
+        return self._day != time.localtime().tm_mday
     def _format_filename(self):
         return os.path.join(self._path, "{}{}{}".format(self._prepend, time.strftime("%Y%m%d"), self._append))
     def write(self, *args):
@@ -54,4 +53,4 @@ with file as logger:
             data = url.read()
             print(data)
             logger.write(data.decode("utf-8"))
-            time.sleep(5)
+            time.sleep(45)
