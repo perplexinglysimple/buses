@@ -6,11 +6,13 @@ import git
 
 class drive:
     def __init__(self):
-        self.repo = git.Repo( './' )
+        print("adfa")
+        #self.repo = git.Repo( './' )
     def upload_file(self, file, filename):
-        self.repo.git.add(  filename )
-        self.repo.git.commit( m= filename + ' Is the file for this day')
-        self.repo.git.push()
+        print("fuck me")
+        #self.repo.git.add(  filename )
+        #self.repo.git.commit( m= filename + ' Is the file for this day')
+        #self.repo.git.push()
 
 class RotatingFileOpener:
     def __init__(self, path, mode='a', prepend="", append=""):
@@ -49,8 +51,11 @@ class RotatingFileOpener:
 file = RotatingFileOpener('./', prepend='bus_data-', append='.txt')
 with file as logger:
     while True:
+      try:
         with urllib.request.urlopen("https://commonlayer.bt4u.org/livemap?bt4uid=0x5796895884c00000&_=1504750958763") as url:
             data = url.read()
             print(data)
             logger.write(data.decode("utf-8"))
             time.sleep(45)
+      except urllib.error.URLError:
+        print(urllib.error.URLError.reason)
