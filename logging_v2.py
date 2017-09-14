@@ -6,13 +6,11 @@ import git
 
 class drive:
     def __init__(self):
-        print("adfa")
-        #self.repo = git.Repo( './' )
+       self.repo = git.Repo( './' )
     def upload_file(self, file, filename):
-        print("fuck me")
-        #self.repo.git.add(  filename )
-        #self.repo.git.commit( m= filename + ' Is the file for this day')
-        #self.repo.git.push()
+        self.repo.git.add(  filename )
+        self.repo.git.commit( m= filename + ' Is the file for this day')
+        self.repo.git.push()
 
 class RotatingFileOpener:
     def __init__(self, path, mode='a', prepend="", append=""):
