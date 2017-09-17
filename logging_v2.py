@@ -8,9 +8,12 @@ class drive:
     def __init__(self):
        self.repo = git.Repo( './' )
     def upload_file(self, file, filename):
-        self.repo.git.add(  filename )
-        self.repo.git.commit( m= filename + ' Is the file for this day')
-        self.repo.git.push()
+        try:
+            self.repo.git.add([filename])
+            self.repo.git.commit( m= filename + ' Is the file for this day')
+            self.repo.git.push()
+        except git.exc.GitCommandError:
+            print("We messed up")
 
 class RotatingFileOpener:
     def __init__(self, path, mode='a', prepend="", append=""):
@@ -52,7 +55,7 @@ with file as logger:
       try:
         with urllib.request.urlopen("https://commonlayer.bt4u.org/livemap?bt4uid=0x5796895884c00000&_=1504750958763") as url:
             data = url.read()
-            print(data)
+            print("data read for time" + str(time.time()))
             logger.write(data.decode("utf-8"))
             time.sleep(45)
       except urllib.error.URLError:
