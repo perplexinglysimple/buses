@@ -9,8 +9,8 @@ class drive:
        self.repo = git.Repo( './' )
     def upload_file(self, file, filename):
         try:
-            self.repo.git.add([filename])
-            self.repo.git.commit( m= filename + ' Is the file for this day')
+            self.repo.git.add(filename)
+            self.repo.git.commit( m= 'Hey will this work?!')
             self.repo.git.push()
         except git.exc.GitCommandError:
             print("We messed up")
@@ -59,4 +59,4 @@ with file as logger:
             logger.write(data.decode("utf-8"))
             time.sleep(45)
       except urllib.error.URLError:
-        print(urllib.error.URLError.reason)
+        print("url failed")
