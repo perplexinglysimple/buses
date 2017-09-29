@@ -23,7 +23,7 @@ class RotatingFileOpener:
         self._prepend = prepend
         self._append = append
         self._mode = mode
-        self._day = time.localtime().tm_mday
+        self._day = '04'
         self.drive = drive()
     def __enter__(self):
         self._filename = self._format_filename()
@@ -32,7 +32,7 @@ class RotatingFileOpener:
     def __exit__(self, *args):
         return getattr(self._file, '__exit__')(*args)
     def _day_changed(self):
-        return self._day != time.localtime().tm_mday
+        return self._day == time.strftime('%H')
     def _format_filename(self):
         return os.path.join(self._path, "{}{}{}".format(self._prepend, time.strftime("%Y%m%d"), self._append))
     def write(self, *args):
